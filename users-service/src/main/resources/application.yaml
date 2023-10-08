@@ -4,8 +4,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/userDb?stringtype=unspecified
     username: postgres
     password: 123
-  h2:
-    console:
-      enabled: true
   liquibase:
     enabled: true
