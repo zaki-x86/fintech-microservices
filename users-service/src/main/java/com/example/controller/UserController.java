@@ -7,7 +7,9 @@ import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -18,18 +20,43 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public UserResponse get(@PathVariable long id) {
-        return userService.getById(id);
+    public ResponseEntity<UserResponse> get(@PathVariable long id) {
+        var userResponse = userService.getById(id);
+        return ResponseEntity.ok(userResponse);
     }
 
     @GetMapping
-    public List<UserResponse> getAll() {
-        return userService.getAll();
+    public ResponseEntity<List<UserResponse>> getAll() {//TODO: add filter and Pagenation
+        var userResponses = userService.getAll();
+        return ResponseEntity.ok(userResponses);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> create(@RequestBody UserRequest request) {
+        int userId = userService.create(request);
+        URI location = getLocation(userId);
+        return ResponseEntity.created(location).build();
     }
 
 
-    @PostMapping
-    public ResponseEntity<?> create(UserRequest request) {
-        return userService.create(request);
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable long id, @RequestBody UserRequest request) {
+        userService.update(id, request);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    public static <T> URI getLocation(T id) {
+        return ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
     }
 }

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.6'
+    id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'nu.studer.jooq' version '6.0.1'
@@ -16,12 +16,16 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
-    implementation 'org.postgresql:postgresql:42.3.3'
+
     runtimeOnly 'org.postgresql:postgresql'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     jooqGenerator 'org.postgresql:postgresql:42.3.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 }
 
 jooq {
@@ -50,18 +54,6 @@ jooq {
                     database {
                         name = 'org.jooq.meta.postgres.PostgresDatabase'
                         inputSchema = 'public'
-                        forcedTypes {
-                            forcedType {
-                                name = 'varchar'
-                                includeExpression = '.*'
-                                includeTypes = 'JSONB?'
-                            }
-                            forcedType {
-                                name = 'varchar'
-                                includeExpression = '.*'
-                                includeTypes = 'INET'
-                            }
-                        }
                     }
                     generate {
                         deprecated = false
@@ -70,7 +62,7 @@ jooq {
                         fluentSetters = true
                     }
                     target {
-                        packageName = 'nu.studer.sample'
+                        packageName = 'com.example'
                         directory = 'build/generated-src/jooq/main'
                     }
                     strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'

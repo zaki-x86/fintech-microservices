@@ -12,5 +12,9 @@ public interface UserService {
 
     List<UserResponse> getAll();
 
-    ResponseEntity<?> create(UserRequest request);
+    int  create(UserRequest request);
+
+    void update(long id, UserRequest request);
+
+    void delete(long id);
 }
