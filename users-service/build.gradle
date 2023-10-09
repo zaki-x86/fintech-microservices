@@ -16,16 +16,16 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
-
-    runtimeOnly 'org.postgresql:postgresql'
-
-    jooqGenerator 'org.postgresql:postgresql:42.3.1'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-jooq'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
+
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    runtimeOnly 'org.postgresql:postgresql'
+    jooqGenerator 'org.postgresql:postgresql:42.3.1'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 jooq {

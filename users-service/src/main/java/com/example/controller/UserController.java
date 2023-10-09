@@ -19,6 +19,9 @@ public class UserController {
 
     private final UserService userService;
 
+
+    //TODO: exception handler
+
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> get(@PathVariable long id) {
         var userResponse = userService.getById(id);
