@@ -1,8 +1,7 @@
 package com.example.service;
 
-import com.example.dto.UserRequest;
-import com.example.dto.UserResponse;
-import org.springframework.http.ResponseEntity;
+import com.example.model.dto.UserRequest;
+import com.example.model.dto.UserResponse;
 
 import java.util.List;
 

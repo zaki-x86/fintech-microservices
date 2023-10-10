@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
-import com.example.dto.UserRequest;
-import com.example.dto.UserResponse;
+import com.example.model.dto.UserRequest;
+import com.example.model.dto.UserResponse;
 import com.example.repository.UserRepo;
 import com.example.service.UserService;
 import com.example.tables.records.UserRecord;
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
 
-    public UserResponse getById(long id) { //TODO: optional
+    public UserResponse getById(long id) {
         return userRepo.findById(id);
     }
 

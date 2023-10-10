@@ -1,8 +1,8 @@
 package com.example.controller;
 
 
-import com.example.dto.UserRequest;
-import com.example.dto.UserResponse;
+import com.example.model.dto.UserRequest;
+import com.example.model.dto.UserResponse;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-
-    //TODO: exception handler
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> get(@PathVariable long id) {
