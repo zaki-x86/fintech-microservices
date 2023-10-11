@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.exception.AlreadyExistsException;
 import com.example.model.dto.UserRequest;
 import com.example.model.dto.UserResponse;
 import com.example.repository.UserRepo;
@@ -29,14 +30,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int create(UserRequest request) {
+        if (isEmailUnique(0, request.getEmail()))
+            throw new AlreadyExistsException(request.getEmail());
         return userRepo.create(request);
     }
 
+    private boolean isEmailUnique(long id, String email) {
+        return userRepo.existsByEmail(id, email) != null;
+    }
+
     @Override
-    public void update(long id, UserRequest request) {
+    public UserResponse update(long id, UserRequest request) {
         UserRecord user = userRepo.findUserById(id);
+        if (isEmailUnique(id, request.getEmail()))
+            throw new AlreadyExistsException(request.getEmail());
         changeIfPresent(user, request);
-        userRepo.update(user);
+        return userRepo.update(user);
     }
 
     private void changeIfPresent(UserRecord userResponse, UserRequest request) {

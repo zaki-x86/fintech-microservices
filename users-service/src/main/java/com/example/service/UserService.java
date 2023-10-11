@@ -13,7 +13,7 @@ public interface UserService {
 
     int  create(UserRequest request);
 
-    void update(long id, UserRequest request);
+    UserResponse update(long id, UserRequest request);
 
     void delete(long id);
 }

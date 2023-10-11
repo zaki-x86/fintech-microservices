@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getAll() {//TODO: add filter and Pagenation
+    public ResponseEntity<List<UserResponse>> getAll() {//TODO: add filter and Pagination
         var userResponses = userService.getAll();
         return ResponseEntity.ok(userResponses);
     }
@@ -40,9 +40,9 @@ public class UserController {
 
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable long id, @RequestBody UserRequest request) {
-        userService.update(id, request);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<UserResponse> update(@PathVariable long id, @RequestBody UserRequest request) {
+        var user = userService.update(id, request);
+        return ResponseEntity.ok(user);
     }
 
 

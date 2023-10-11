@@ -1,5 +1,6 @@
 package com.example.exception.handler;
 
+import com.example.exception.AlreadyExistsException;
 import com.example.model.dto.ExceptionResponse;
 import com.example.exception.CustomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -28,5 +29,19 @@ public class CustomExceptionHandler {
 
         log.error("{}", response);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler(AlreadyExistsException.class)
+    public final ResponseEntity<?> handleAlreadyExistsException(AlreadyExistsException exception,
+                                                                 WebRequest request) {
+        ExceptionResponse response = ExceptionResponse.builder()
+                .timestamp(Instant.now())
+                .exception(exception.getClass().getSimpleName())
+                .message(exception.getMessage())
+                .path(request.getDescription(false))
+                .build();
+
+        log.error("{}", response);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }

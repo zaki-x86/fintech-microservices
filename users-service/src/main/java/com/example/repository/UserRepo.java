@@ -22,21 +22,23 @@ public class UserRepo {
 
     private final DSLContext dsl;
 
-    public UserResponse findById(long id) {//TODO"
+    public UserResponse findById(long id) {  //TODO
         return Optional.ofNullable(
-                        dsl
-                                .selectFrom(USER)
-                                .where(USER.ID.eq(id).and(USER.STATUS.ne(UserStatus.DELETED.toString())))
-                                .fetchAnyInto(UserResponse.class)
-                ).orElseThrow(() -> new CustomNotFoundException(id));
+                dsl
+                        .selectFrom(USER)
+                        .where(USER.ID.eq(id).and(USER.STATUS.ne(UserStatus.DELETED.toString())))
+                        .fetchAnyInto(UserResponse.class)
+        ).orElseThrow(() -> new CustomNotFoundException(id));
     }
 
 
     public UserRecord findUserById(long id) {
-        return dsl
-                .selectFrom(USER)
-                .where(USER.ID.eq(id).and(USER.STATUS.ne(UserStatus.DELETED.toString())))
-                .fetchOne();
+        return Optional.ofNullable(
+                dsl
+                        .selectFrom(USER)
+                        .where(USER.ID.eq(id).and(USER.STATUS.ne(UserStatus.DELETED.toString())))
+                        .fetchOne()
+        ).orElseThrow(() -> new CustomNotFoundException(id));
     }
 
 
@@ -67,23 +69,29 @@ public class UserRepo {
         return userId.intValue();
     }
 
-    public void update(UserRecord user) {
-        dsl.update(USER)
+    public UserResponse update(UserRecord user) {
+        return dsl.update(USER)
                 .set(
-                        row(USER.FIRSTNAME, USER.LASTNAME, USER.PASSWORD, USER.EMAIL, USER.BIRTH_DATE),
-                        row(user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getBirthDate()))
+                        row(USER.FIRSTNAME, USER.LASTNAME, USER.PASSWORD, USER.EMAIL, USER.BIRTH_DATE, USER.STATUS),
+                        row(user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getBirthDate(), user.getStatus()))
                 .where(USER.ID.equal(user.getId()))
-                .execute();
+                .returning().fetchAnyInto(UserResponse.class);
     }
 
 
     public void delete(long id) {
-
         dsl.update(USER)
                 .set(
                         row(USER.STATUS),
                         row(UserStatus.DELETED.toString()))
                 .where(USER.ID.equal(id))
                 .execute();
+    }
+
+    public UserResponse existsByEmail(long id, String email) {
+        return dsl
+                .selectFrom(USER)
+                .where(USER.EMAIL.eq(email).and(USER.ID.ne(id)))
+                .fetchAnyInto(UserResponse.class);
     }
 }
