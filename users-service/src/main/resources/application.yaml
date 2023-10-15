@@ -1,4 +1,8 @@
 spring:
+  application:
+    name: users-service
+  config:
+    import: optional:configserver:http://localhost:8888 # TODO agte eureka
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/userDb?stringtype=unspecified
