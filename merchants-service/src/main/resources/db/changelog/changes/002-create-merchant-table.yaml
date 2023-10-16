@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220804-02
+      author: samir
+      changes:
+        - createTable:
+            tableName: merchant
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: merchant_pk
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: icon
+                  type: VARCHAR(255)
+              - column:
+                  name: processing_secret_key
+                  type: VARCHAR(255)
+                  constraints:
+                     nullable: false
+                     unique: true
+              - column:
+                  name: row_number
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: service_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(250)
+                  defaultValue: 'ENABLED'
+              - column:
+                  name: created_at
+                  type: datetime
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: datetime
+        - addForeignKeyConstraint:
+            baseTableName: merchant
+            baseColumnNames: service_id
+            constraintName: merchant_service_fk
+            referencedTableName: service
+            referencedColumnNames: id

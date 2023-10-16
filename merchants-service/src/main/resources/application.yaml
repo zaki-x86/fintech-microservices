@@ -5,7 +5,7 @@ spring:
     import: optional:configserver:http://localhost:8888 # TODO agte eureka
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/user_dbb?stringtype=unspecified
+    url: jdbc:postgresql://localhost:5432/merchant_db?stringtype=unspecified
     username: postgres
     password: 123
   liquibase:

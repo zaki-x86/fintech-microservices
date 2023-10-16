@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220804-04
+      author: samir
+      changes:
+        - insert:
+            tableName: service
+            columns:
+              - column:
+                 name: name
+                 value: "Kommunal Xidmət"
+              - column:
+                 name: icon
+                 value: "1562574699_26672_kommunal_new.svg"
+              - column:
+                  name: row_number
+                  value: "1"
+        - insert:
+            tableName: service
+            columns:
+              - column:
+                 name: name
+                 value: "Mobil Operatorlar"
+              - column:
+                 name: icon
+                 value: "1562574699_26672_kommunal_new.svg"
+              - column:
+                  name: row_number
+                  value: "2"
