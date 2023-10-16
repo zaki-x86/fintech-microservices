@@ -36,6 +36,6 @@ public class Service {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp //TODO: test
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 }
