@@ -1,8 +1,9 @@
 plugins {
+    id 'java'
     id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
     id 'nu.studer.jooq' version '6.0.1'
+    id 'pl.allegro.tech.build.axion-release' version '1.13.2'
 }
 
 group = 'com.example'
