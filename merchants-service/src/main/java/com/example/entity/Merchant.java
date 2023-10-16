@@ -28,7 +28,7 @@ public class Merchant {
     private int rowNumber;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "service_id")
     private Service service;
 

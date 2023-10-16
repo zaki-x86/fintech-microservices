@@ -23,7 +23,7 @@ databaseChangeLog:
                  value: "Mobil Operatorlar"
               - column:
                  name: icon
-                 value: "1562574699_26672_kommunal_new.svg"
+                 value: "1562574699_26672_mobil_new.svg"
               - column:
                   name: row_number
                   value: "2"

@@ -9,9 +9,15 @@ spring:
     username: postgres
     password: 123
   jpa:
+    show-sql: false
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        integrator_provider: com.example.config.CustomIntegratorProvider
   liquibase:
     enabled: true
+
+spring.jpa.properties.hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 1
