@@ -2,9 +2,10 @@
 
 
 
-0) security
-
-1) config-server integration
-2) mock-processing
-3) mock-billing
-4) security
+- security
+- config-server integratio
+- kibana
+- add retry to all microservices while send request
+- mock-processing
+- mock-billing
+- security

@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: users-service
+  config:
+    import: optional:configserver:http://localhost:8888 # TODO agte eureka
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/auth_db?stringtype=unspecified
+    username: postgres
+    password: 123
+  jpa:
+    show-sql: false
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+  liquibase:
+    enabled: true
+
+security:
+  cors:
+    allowed-headers: '*'
+    allowed-origins: '*'
+    allowed-methods: '*'
+    exposed-headers: 'Authorization,Link'
+    allow-credentials: false
+    max-age: 1800
+  jwt:
+    subject: Fintech
+    secret-key: asdas89d99123kskadj12jedkaskjd1092jeasoijjd9081j2d0j90812je0918j2djkawjd120830ak191891i19ka
+    expiration-with-minutes: 10

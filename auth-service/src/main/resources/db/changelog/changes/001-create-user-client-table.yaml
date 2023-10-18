@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220806-01
+      author: samir
+      changes:
+        - createTable:
+            tableName: user_client
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_client_pk
+                    nullable: false
+              - column:
+                  name: ip
+                  type: inet
+                  constraints:
+                    nullable: false
+              - column:
+                  name: os
+                  type: VARCHAR(255)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  defaultValue: now()
