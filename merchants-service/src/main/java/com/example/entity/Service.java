@@ -24,7 +24,7 @@ public class Service {
 
     private String name;
     private String icon;
-    private String rowNumber;
+    private int rowNumber;
 
     @Enumerated(EnumType.STRING)
     private Status status;

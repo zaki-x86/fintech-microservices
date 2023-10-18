@@ -3,6 +3,12 @@
 
 
 - security
+     write login date to db
+     issue method logic
+     send request to user service if needed
+     grpc
+     test if needed
+
 - config-server integratio
 - kibana
 - add retry to all microservices while send request
