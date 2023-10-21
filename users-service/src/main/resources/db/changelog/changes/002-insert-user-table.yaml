@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220812-01
+      author: samir
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                 name: password
+                 value: "$2a$10$XubHjDOuulRVbq/kajaGXut4A2bpWpLpIlYdml3vsJADgO8gkqvHW" # 12345
+              - column:
+                 name: firstName
+                 value: "Samir"
+              - column:
+                  name: lastName
+                  value: "Allahverdiyev"
+              - column:
+                  name: email
+                  value: "smrallahverdieff@gmail.com"
+              - column:
+                  name: birth_date
+                  value: "1998-03-31"

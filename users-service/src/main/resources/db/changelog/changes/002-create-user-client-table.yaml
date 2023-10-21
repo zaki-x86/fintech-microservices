@@ -31,3 +31,9 @@ databaseChangeLog:
                   name: created_at
                   type: datetime
                   defaultValue: now()
+        - addForeignKeyConstraint:
+            baseTableName: user_client
+            baseColumnNames: user_id
+            constraintName: user_client_user_fk
+            referencedTableName: user
+            referencedColumnNames: id

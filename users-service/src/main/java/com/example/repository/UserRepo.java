@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.model.dto.UserAuthResponse;
 import com.example.model.dto.UserRequest;
 import com.example.model.dto.UserResponse;
 import com.example.exception.CustomNotFoundException;
@@ -29,6 +30,16 @@ public class UserRepo {
                         .where(USER.ID.eq(id).and(USER.STATUS.ne(UserStatus.DELETED.toString())))
                         .fetchAnyInto(UserResponse.class)
         ).orElseThrow(() -> new CustomNotFoundException(id));
+    }
+
+
+    public Optional<UserAuthResponse> findUserAuthByEmail(String email) {
+        return Optional.ofNullable(
+                dsl
+                        .selectFrom(USER)
+                        .where(USER.EMAIL.eq(email).and(USER.STATUS.ne(UserStatus.DELETED.toString())))
+                        .fetchAnyInto(UserAuthResponse.class)
+        );
     }
 
 

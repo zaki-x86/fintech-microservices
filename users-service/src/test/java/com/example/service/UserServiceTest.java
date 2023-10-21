@@ -1,12 +1,11 @@
 package com.example.service;
 
 import com.example.exception.AlreadyExistsException;
+import com.example.exception.CustomNotFoundException;
 import com.example.model.dto.UserRequest;
 import com.example.model.dto.UserResponse;
-import com.example.exception.CustomNotFoundException;
 import com.example.model.enumaration.UserStatus;
 import com.example.repository.UserRepo;
-import com.example.service.impl.UserServiceImpl;
 import com.example.tables.records.UserRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +20,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.when;
-
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,7 +39,7 @@ public class UserServiceTest {
 
     @BeforeEach
     void init() {
-        userService = new UserServiceImpl(userRepo);
+        userService = new UserService(userRepo);
 
         DUMMY_USER_REQUEST = UserRequest.builder()
                 .firstName("Samir")

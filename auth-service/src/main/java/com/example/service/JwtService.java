@@ -38,7 +38,7 @@ public class JwtService {
             return Optional.empty();
 
 
-        int userId = (int) claims.get(SecurityProperties.CLAIM_USER_ID);
+        int userId = (int) claims.get(SecurityProperties.CLAIM_USER_EMAIL);
         return Optional.of(userId);
     }
 
@@ -60,7 +60,7 @@ public class JwtService {
                 .setSubject(properties.getJwt().getSubject())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(Instant.now().plus(duration)))
-                .claim(SecurityProperties.CLAIM_USER_ID, userId)
+                .claim(SecurityProperties.CLAIM_USER_EMAIL, userId)
                 .signWith(properties.getJwt().getKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
