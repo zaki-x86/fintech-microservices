@@ -22,37 +22,35 @@ public class AuthService {
 
     private final UserRepo userRepo;
     private final PasswordEncoder encoder;
-    private final JwtIssuer issuer;
+    private final JwtIssuer jwt;
     private final UserClientRepo userClientRepo;
     private final HttpServletRequest request;
 
     public LoginResponse login(LoginRequest loginRequest) {
 
-        validateLoginRequest(loginRequest);
-        saveUserClient();
+        UserAuthResponse userAuth = userRepo.findUserAuthByEmail(loginRequest.getEmail())
+                .orElseThrow(AuthenticationException::new);
+
+        checkPassword(loginRequest.getPassword(), userAuth.getPassword());
+        saveUserClient(userAuth.getId());
 
         return LoginResponse.builder()
-                .email(loginRequest.getEmail())
-                .token(issuer.issue(loginRequest.getEmail()))
+                .email(userAuth.getEmail())
+                .token(jwt.issue(userAuth.getEmail()))
                 .build();
     }
 
-    private void saveUserClient() {
-        String header = request.getHeader(HttpHeaders.USER_AGENT);
-        OperatingSystem os = UserAgent.parseUserAgentString(header).getOperatingSystem();
-        String ip = request.getRemoteAddr();
 
-        userClientRepo.save(0, os.getName(), ip);
+    private void checkPassword(String rawPassword, String hashedPassword) {
+        if (!encoder.matches(rawPassword, hashedPassword))
+            throw new AuthenticationException();
     }
 
+    private void saveUserClient(long userId) {
+        String header = request.getHeader(HttpHeaders.USER_AGENT);
+        OperatingSystem os = UserAgent.parseUserAgentString(header).getOperatingSystem();
 
-    private void validateLoginRequest(LoginRequest request) {
-
-        UserAuthResponse userAuth = userRepo.findUserAuthByEmail(request.getEmail())
-                .orElseThrow(AuthenticationException::new);
-
-        if (!encoder.matches(request.getPassword(), userAuth.getPassword()))
-            throw new AuthenticationException();
+        userClientRepo.save(userId, os.getName(), request.getRemoteAddr());
     }
 
 }

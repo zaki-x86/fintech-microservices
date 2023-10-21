@@ -42,7 +42,7 @@ jooq {
             generationTool {
                 jdbc {
                     driver = 'org.postgresql.Driver'
-                    url = 'jdbc:postgresql://localhost:5432/userDb'
+                    url = 'jdbc:postgresql://localhost:5432/user_db'
                     user = 'postgres'
                     password = '123'
                     properties {
