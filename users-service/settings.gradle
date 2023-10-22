@@ -1,1 +1,3 @@
 rootProject.name = 'users-service'
+include ":grpc-common"
+project(":grpc-common").projectDir = file("../grpc-common")

@@ -1,3 +1,9 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.6")
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -7,6 +13,7 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
 
 configurations {
     compileOnly {
@@ -19,18 +26,15 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation "io.jsonwebtoken:jjwt-api:0.11.2"
     implementation "io.jsonwebtoken:jjwt-impl:0.11.2"
     implementation "io.jsonwebtoken:jjwt-jackson:0.11.2"
+    implementation 'net.devh:grpc-server-spring-boot-starter:2.12.0.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation project(":grpc-common")
     implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.6'
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {

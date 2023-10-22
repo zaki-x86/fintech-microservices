@@ -1,7 +1,3 @@
-
-
-
-
 - security
      security properties (auth service, user service) from one place
      write login date to db
@@ -9,7 +5,7 @@
      send request to user service if needed
      grpc
      test if needed
-
+- login api test
 - config-server integration
 - kibana
 - add retry to all microservices while send request

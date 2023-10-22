@@ -1,52 +1,56 @@
 package com.example.service;
 
 import com.example.config.SecurityProperties;
-import com.example.exception.AuthenticationException;
+import com.google.protobuf.BoolValue;
+import com.google.protobuf.StringValue;
+import io.grpc.stub.StreamObserver;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import net.devh.boot.grpc.server.service.GrpcService;
+import org.example.JwtServiceGrpc;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
 
-@Service
+@GrpcService
 @RequiredArgsConstructor
-public class JwtService {
+public class JwtService extends JwtServiceGrpc.JwtServiceImplBase {
 
     private final SecurityProperties properties;
 
-    public int getUserId(String header) {
+    @Override
+    public void validateToken(StringValue request, StreamObserver<BoolValue> responseObserver) {
+
+        BoolValue boolValue = BoolValue.newBuilder()
+                .setValue(isTokenValid(request.getValue()))
+                .build();
+
+        responseObserver.onNext(boolValue);
+        responseObserver.onCompleted();
+    }
+
+    public boolean isTokenValid(String header) {
         return Optional.ofNullable(header)
                 .filter(this::isTokenBearer)
-                .flatMap(this::toUserId)
-                .orElseThrow(AuthenticationException::new);
+                .filter(this::isTokenNotExpired)
+                .isPresent();
     }
 
     private boolean isTokenBearer(String header) {
         return header.startsWith(SecurityProperties.BEARER);
     }
 
-    private Optional<Integer> toUserId(String header) {
+
+    private boolean isTokenNotExpired(String header) {
         String token = header.substring(SecurityProperties.BEARER.length()).trim();
         Claims claims = parse(token);
 
-        if (isTokenExpired(claims))
-            return Optional.empty();
-
-
-        int userId = (int) claims.get(SecurityProperties.CLAIM_USER_EMAIL);
-        return Optional.of(userId);
-    }
-
-    private boolean isTokenExpired(Claims claims) {
         return claims.getExpiration().before(new Date());
     }
 
     private Claims parse(String token) {
+
         return Jwts.parserBuilder()
                 .setSigningKey(properties.getJwt().getKey())
                 .build()
@@ -54,14 +58,21 @@ public class JwtService {
                 .getBody();
     }
 
-    public String issue(int userId) {
-        Duration duration = Duration.ofMinutes(properties.getJwt().getExpirationWithMinutes());
-        return Jwts.builder()
-                .setSubject(properties.getJwt().getSubject())
-                .setIssuedAt(new Date())
-                .setExpiration(Date.from(Instant.now().plus(duration)))
-                .claim(SecurityProperties.CLAIM_USER_EMAIL, userId)
-                .signWith(properties.getJwt().getKey(), SignatureAlgorithm.HS512)
-                .compact();
+    @Override
+    public void getUserEmail(StringValue request, StreamObserver<StringValue> responseObserver) {
+
+        StringValue stringValue = StringValue.newBuilder()
+                .setValue(getUserEmail(request.getValue()))
+                .build();
+
+        responseObserver.onNext(stringValue);
+        responseObserver.onCompleted();
+    }
+
+    public String getUserEmail(String header) {
+        String token = header.substring(SecurityProperties.BEARER.length()).trim();
+        Claims claims = parse(token);
+
+        return String.valueOf(claims.get(SecurityProperties.CLAIM_USER_EMAIL));
     }
 }
