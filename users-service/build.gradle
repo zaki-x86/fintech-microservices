@@ -22,7 +22,6 @@ repositories {
 dependencies {
     implementation project(":grpc-common")
 
-    implementation 'net.devh:grpc-client-spring-boot-starter'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "io.jsonwebtoken:jjwt-api:0.11.2"
@@ -33,12 +32,13 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.6'
     annotationProcessor 'org.projectlombok:lombok'
-    compileOnly 'net.devh:grpc-client-spring-boot-starter'
     compileOnly 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
     runtimeOnly 'org.postgresql:postgresql'
     jooqGenerator 'org.postgresql:postgresql:42.3.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'net.devh:grpc-client-spring-boot-starter:2.13.1.RELEASE'
+
 }
 
 jooq {

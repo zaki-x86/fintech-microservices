@@ -1,3 +1,13 @@
+server.port: 8081
+
+grpc:
+  client:
+    auth-service:
+      address: 'localhost:9090'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
 spring:
   application:
     name: users-service

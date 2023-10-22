@@ -32,9 +32,9 @@ protobuf {
         artifact = "com.google.protobuf:protoc:${protobufVersion}"
     }
     generatedFilesBaseDir = "$projectDir/src/"
-    clean {
-        delete generatedFilesBaseDir
-    }
+//    clean {
+//        delete generatedFilesBaseDir
+//    }
     plugins {
         grpc {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
