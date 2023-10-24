@@ -20,22 +20,22 @@ public class JwtService extends JwtServiceGrpc.JwtServiceImplBase {
     private final SecurityProperties properties;
 
     @Override
-    public void validateToken(StringValue request, StreamObserver<BoolValue> responseObserver) {
+    public void isTokenValid(StringValue request, StreamObserver<BoolValue> responseObserver) {
+
+
+        boolean isTokenValid =Optional.of(request.getValue())
+                .filter(this::isTokenBearer)
+                .filter(this::isTokenNotExpired)
+                .isPresent();
 
         BoolValue boolValue = BoolValue.newBuilder()
-                .setValue(isTokenValid(request.getValue()))
+                .setValue(isTokenValid)
                 .build();
 
         responseObserver.onNext(boolValue);
         responseObserver.onCompleted();
     }
 
-    public boolean isTokenValid(String header) {
-        return Optional.ofNullable(header)
-                .filter(this::isTokenBearer)
-                .filter(this::isTokenNotExpired)
-                .isPresent();
-    }
 
     private boolean isTokenBearer(String header) {
         return header.startsWith(SecurityProperties.BEARER);
@@ -43,10 +43,13 @@ public class JwtService extends JwtServiceGrpc.JwtServiceImplBase {
 
 
     private boolean isTokenNotExpired(String header) {
-        String token = header.substring(SecurityProperties.BEARER.length()).trim();
-        Claims claims = parse(token);
-
-        return claims.getExpiration().before(new Date());
+        try {
+            String token = header.substring(SecurityProperties.BEARER.length()).trim();
+            Claims claims = parse(token);
+            return claims.getExpiration().after(new Date());
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     private Claims parse(String token) {

@@ -8,7 +8,7 @@ option java_package = "org.example";
 import "google/protobuf/wrappers.proto";
 
 service JwtService {
-  rpc validateToken (google.protobuf.StringValue) returns (google.protobuf.BoolValue) {
+  rpc isTokenValid (google.protobuf.StringValue) returns (google.protobuf.BoolValue) {
   }
   rpc getUserEmail (google.protobuf.StringValue) returns (google.protobuf.StringValue) {
   }

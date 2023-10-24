@@ -25,18 +25,18 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserResponse>> getAll() {//TODO: add filter and Pagination
-        var userResponses = userService.getAll();
-        return ResponseEntity.ok(userResponses);
-    }
-
-    @PostMapping
-    public ResponseEntity<Object> create(@RequestBody UserRequest request) {
-        int userId = userService.create(request);
-        URI location = getLocation(userId);
-        return ResponseEntity.created(location).build();
-    }
+//    @GetMapping
+//    public ResponseEntity<List<UserResponse>> getAll() {//TODO: add filter and Pagination
+//        var userResponses = userService.getAll();
+//        return ResponseEntity.ok(userResponses);
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<Object> create(@RequestBody UserRequest request) {
+//        int userId = userService.create(request);
+//        URI location = getLocation(userId);
+//        return ResponseEntity.created(location).build();
+//    }
 
 
     @PatchMapping("/{id}")
@@ -46,11 +46,11 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable long id) {
-        userService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> delete(@PathVariable long id) {
+//        userService.delete(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
 
     public static <T> URI getLocation(T id) {

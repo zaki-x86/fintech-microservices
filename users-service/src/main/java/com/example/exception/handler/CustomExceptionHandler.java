@@ -19,7 +19,7 @@ public class CustomExceptionHandler {
 
 
     @ExceptionHandler(AuthenticationException.class)
-    public final ResponseEntity<?> handleCustomNotFoundException(CustomNotFoundException exception,
+    public final ResponseEntity<?> handleCustomNotFoundException(AuthenticationException exception,
                                                                  WebRequest request) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .timestamp(Instant.now())

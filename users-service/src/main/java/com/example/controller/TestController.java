@@ -16,31 +16,17 @@ public class TestController {
 
 
     @GrpcClient("auth-service")
-    private JwtServiceGrpc.JwtServiceStub stub;
-
+    private JwtServiceGrpc.JwtServiceBlockingStub stub2;
 
     @GetMapping
-    public String get() {
+    public String get(String token) {
 
-        StringValue asdasd = StringValue.newBuilder().setValue("asdasd").build();
 
-        System.out.println(stub.getChannel());
-        stub.validateToken(asdasd, new StreamObserver<BoolValue>() {
-            @Override
-            public void onNext(BoolValue value) {
-                System.out.println("onNext");
-            }
+        StringValue asdasd = StringValue.newBuilder().setValue(token).build();
 
-            @Override
-            public void onError(Throwable t) {
+        BoolValue boolValue = stub2.isTokenValid(asdasd);
+        System.out.println(boolValue.getValue());
 
-            }
-
-            @Override
-            public void onCompleted() {
-
-            }
-        });
-    return "OK";
+        return "OK";
     }
 }
