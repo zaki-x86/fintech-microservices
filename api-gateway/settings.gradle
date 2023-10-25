@@ -1,0 +1,3 @@
+rootProject.name = 'api-gateway'
+include ":grpc-common"
+project(":grpc-common").projectDir = file("../grpc-common")
