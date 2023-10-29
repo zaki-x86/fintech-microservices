@@ -8,6 +8,14 @@ grpc:
       keepAliveWithoutCalls: true
       negotiationType: plaintext
 
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+
 spring:
   application:
     name: users-service
@@ -20,6 +28,7 @@ spring:
     password: 123
   liquibase:
     enabled: true
+
 security:
   cors:
     allowed-headers: '*'

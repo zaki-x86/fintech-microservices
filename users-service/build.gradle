@@ -3,6 +3,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.6")
     }
 }
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.5.6'
@@ -19,10 +20,13 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2020.0.3")
+}
+
+
 dependencies {
     implementation project(":grpc-common")
-
-
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "io.jsonwebtoken:jjwt-api:0.11.2"
     implementation "io.jsonwebtoken:jjwt-impl:0.11.2"
@@ -38,7 +42,13 @@ dependencies {
     jooqGenerator 'org.postgresql:postgresql:42.3.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'net.devh:grpc-client-spring-boot-starter:2.13.1.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 jooq {

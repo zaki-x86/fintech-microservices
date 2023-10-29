@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> get(@PathVariable long id) {
+    public ResponseEntity<UserResponse> get(@PathVariable long id,HttpServletRequest request) {
+
+        System.out.println(request.getHeader("X-User-Email"));
         var userResponse = userService.getById(id);
         return ResponseEntity.ok(userResponse);
     }

@@ -4,6 +4,15 @@ spring:
   application:
     name: api-gateway
 
+grpc:
+  client:
+    auth-service:
+      address: 'localhost:9090'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+
+
 eureka:
   instance:
     hostname: localhost
@@ -13,5 +22,5 @@ eureka:
 
 
 # it can discover other services from eureka
-spring.cloud.gateway.discovery.locator.enabled: true
+spring.cloud.gateway.discovery.locator.enabled: false
 spring.cloud.gateway.discovery.locator.lower-case-service-id: true
