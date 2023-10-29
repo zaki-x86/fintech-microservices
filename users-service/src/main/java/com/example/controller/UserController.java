@@ -20,10 +20,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> get(@PathVariable long id,HttpServletRequest request) {
-
-        System.out.println(request.getHeader("X-User-Email"));
+    @GetMapping("/{id}") // TODO Structure will be changed, email will be used
+    public ResponseEntity<UserResponse> get(@PathVariable long id) {
         var userResponse = userService.getById(id);
         return ResponseEntity.ok(userResponse);
     }
@@ -42,8 +40,8 @@ public class UserController {
 //    }
 
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable long id, @RequestBody UserRequest request) {
+    @PatchMapping("/{id}") // TODO Structure will be changed, email will be used
+    public ResponseEntity<UserResponse> update(@PathVariable long id, @RequestBody UserRequest request ) {
         var user = userService.update(id, request);
         return ResponseEntity.ok(user);
     }

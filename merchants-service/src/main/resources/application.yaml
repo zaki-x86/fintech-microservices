@@ -1,6 +1,9 @@
+server:
+  port: 8082
+
 spring:
   application:
-    name: users-service
+    name: merchants-service
   config:
     import: optional:configserver:http://localhost:8888 # TODO agte eureka
   datasource:
@@ -19,4 +22,11 @@ spring:
         integrator_provider: com.example.config.CustomIntegratorProvider
   liquibase:
     enabled: true
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
 

@@ -8,7 +8,9 @@ import org.example.JwtServiceGrpc;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -25,31 +27,35 @@ public class AuthFilter implements GlobalFilter {
     @GrpcClient("auth-service")
     private JwtServiceGrpc.JwtServiceBlockingStub jwtServiceBlockingStub;
 
-    private String getUserEmail(String header) {
-        StringValue headerStrVal = StringValue.of(header);
-        BoolValue boolVal = jwtServiceBlockingStub.isTokenValid(headerStrVal);
-        if (!boolVal.getValue())
-            throw new RuntimeException(); //TODO
-        else {
-            StringValue emailStrVal = jwtServiceBlockingStub.getUserEmail(headerStrVal);
-            return emailStrVal.getValue();
-        }
-    }
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-        ServerHttpRequest request = exchange.getRequest().mutate()
-                .headers(httpHeaders -> { //TODO: exclude Urls
+        ServerHttpRequest request = exchange.getRequest();
+        Optional<String> authHeaderOpt = Optional.ofNullable(request.getHeaders().get(HttpHeaders.AUTHORIZATION))
+                .stream().findFirst()
+                .map(a -> a.get(0));
 
-                    Optional.ofNullable(httpHeaders.get(HttpHeaders.AUTHORIZATION)).stream()
-                            .findFirst()
-                            .map(a -> a.get(0))
-                            .map(this::getUserEmail)
-                            .ifPresent(s -> httpHeaders.set(X_USER_EMAIL, s));
+        if (authHeaderOpt.isPresent()) {
+            StringValue headerStrVal = StringValue.of(authHeaderOpt.get());
+            BoolValue isTokenValid = jwtServiceBlockingStub.isTokenValid(headerStrVal);
 
-                }).build();
+            if (!isTokenValid.getValue())
+                return onError(exchange, HttpStatus.UNAUTHORIZED);
+            else {
+                StringValue emailStrVal = jwtServiceBlockingStub.getUserEmail(headerStrVal);
+                request = request.mutate()
+                        .header(X_USER_EMAIL, emailStrVal.getValue())
+                        .build();
+            }
+        }
 
         return chain.filter(exchange.mutate().request(request).build());
+    }
+
+    private Mono<Void> onError(ServerWebExchange exchange, HttpStatus httpStatus) {
+        ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(httpStatus);
+
+        return response.setComplete();
     }
 }
