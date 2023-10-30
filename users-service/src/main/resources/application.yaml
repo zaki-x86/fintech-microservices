@@ -1,26 +1,10 @@
 server.port: 8081
 
-grpc:
-  client:
-    auth-service:
-      address: 'localhost:9090'
-      enableKeepAlive: true
-      keepAliveWithoutCalls: true
-      negotiationType: plaintext
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-
-
 spring:
   application:
     name: users-service
   config:
-    import: optional:configserver:http://localhost:8888 # TODO agte eureka
+    import: optional:configserver:http://localhost:8888
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/user_db?stringtype=unspecified
@@ -29,15 +13,4 @@ spring:
   liquibase:
     enabled: true
 
-security:
-  cors:
-    allowed-headers: '*'
-    allowed-origins: '*'
-    allowed-methods: '*'
-    exposed-headers: 'Authorization,Link'
-    allow-credentials: false
-    max-age: 1800
-  jwt:
-    subject: Fintech
-    secret-key: asdas89d99123kskadj12jedkaskjd1092jeasoijjd9081j2d0j90812je0918j2djkawjd120830ak191891i19ka
-    expiration-with-minutes: 10
+

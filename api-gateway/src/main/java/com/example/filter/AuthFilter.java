@@ -34,7 +34,6 @@ public class AuthFilter implements GlobalFilter {
         Optional<String> authHeaderOpt = Optional.ofNullable(request.getHeaders().get(HttpHeaders.AUTHORIZATION))
                 .stream().findFirst()
                 .map(a -> a.get(0));
-
         if (authHeaderOpt.isPresent()) {
             StringValue headerStrVal = StringValue.of(authHeaderOpt.get());
             BoolValue isTokenValid = jwtServiceBlockingStub.isTokenValid(headerStrVal);

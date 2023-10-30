@@ -22,7 +22,6 @@ public class JwtService extends JwtServiceGrpc.JwtServiceImplBase {
     @Override
     public void isTokenValid(StringValue request, StreamObserver<BoolValue> responseObserver) {
 
-
         boolean isTokenValid =Optional.of(request.getValue())
                 .filter(this::isTokenBearer)
                 .filter(this::isTokenNotExpired)
