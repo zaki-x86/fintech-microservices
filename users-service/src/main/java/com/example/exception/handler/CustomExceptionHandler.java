@@ -19,7 +19,7 @@ public class CustomExceptionHandler {
 
 
     @ExceptionHandler(AuthenticationException.class)
-    public final ResponseEntity<?> handleCustomNotFoundException(AuthenticationException exception,
+    public final ResponseEntity<ExceptionResponse> handleCustomNotFoundException(AuthenticationException exception,
                                                                  WebRequest request) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .timestamp(Instant.now())
@@ -35,7 +35,7 @@ public class CustomExceptionHandler {
 
 
     @ExceptionHandler(AlreadyExistsException.class)
-    public final ResponseEntity<?> handleAlreadyExistsException(AlreadyExistsException exception,
+    public final ResponseEntity<ExceptionResponse> handleAlreadyExistsException(AlreadyExistsException exception,
                                                                  WebRequest request) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .timestamp(Instant.now())

@@ -16,7 +16,7 @@ import java.time.Instant;
 public class CustomExceptionHandler {
 
     @ExceptionHandler(CustomNotFoundException.class)
-    public final ResponseEntity<?> handleCustomNotFoundException(CustomNotFoundException exception,
+    public final ResponseEntity<ExceptionResponse> handleCustomNotFoundException(CustomNotFoundException exception,
                                                                  WebRequest request) {
         ExceptionResponse response = ExceptionResponse.builder()
                 .timestamp(Instant.now())

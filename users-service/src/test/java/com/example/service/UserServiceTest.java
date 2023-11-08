@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+  class UserServiceTest {
 
     @Mock
     private UserRepo userRepo;
@@ -70,7 +70,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void testGetById() {
+      void testGetById() {
         int id = 1;
         when(userRepo.findById(id)).thenReturn(DUMMY_USER_RESPONSE);
         UserResponse userResponse = userService.getById(id);
@@ -82,7 +82,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testThrowsExceptionIfIdNotFoundInGetById() {
+      void testThrowsExceptionIfIdNotFoundInGetById() {
         int id = 2;
         when(userRepo.findById(id)).thenThrow(CustomNotFoundException.class);
         assertThatThrownBy(() -> userService.getById(id))
@@ -91,7 +91,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void testGetAll() {
+      void testGetAll() {
         List<UserResponse> dummyUserResponses = Arrays.asList(DUMMY_USER_RESPONSE, DUMMY_USER_RESPONSE, DUMMY_USER_RESPONSE);
         when(userRepo.findAll()).thenReturn(dummyUserResponses);
         List<UserResponse> userResponses =userService.getAll();
@@ -100,7 +100,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void testCreate() {
+      void testCreate() {
         int createdUserId = 1;
         when(userRepo.create(any(UserRequest.class))).thenReturn(createdUserId);
         int id = userService.create(DUMMY_USER_REQUEST);
@@ -109,14 +109,14 @@ public class UserServiceTest {
 
 
     @Test
-    public void testThrowsExceptionIfEmailDuplicatedInCreate() {
+      void testThrowsExceptionIfEmailDuplicatedInCreate() {
         when(userRepo.create(any(UserRequest.class))).thenThrow(AlreadyExistsException.class);
         assertThatThrownBy(() -> userRepo.create(DUMMY_USER_REQUEST))
                 .isInstanceOf(AlreadyExistsException.class);
     }
 
     @Test
-    public void testUpdate() {
+      void testUpdate() {
         int id = 1;
         when(userRepo.findUserById(id)).thenReturn(DUMMY_USER_RECORD);
         when(userRepo.update(any(UserRecord.class))).thenReturn(DUMMY_USER_RESPONSE);
@@ -131,7 +131,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testThrowsExceptionIfIdNotFoundInUpdate() {
+      void testThrowsExceptionIfIdNotFoundInUpdate() {
         when(userRepo.findUserById(1)).thenThrow(CustomNotFoundException.class);
         assertThatThrownBy(() -> userService.update(1, DUMMY_USER_REQUEST))
                 .isInstanceOf(CustomNotFoundException.class);
@@ -139,7 +139,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void testThrowsExceptionIfEmailDuplicatedInCreateInUpdate() {
+      void testThrowsExceptionIfEmailDuplicatedInCreateInUpdate() {
         when(userRepo.findUserById(1)).thenThrow(AlreadyExistsException.class);
         assertThatThrownBy(() -> userService.update(1, DUMMY_USER_REQUEST))
                 .isInstanceOf(AlreadyExistsException.class);
@@ -147,7 +147,7 @@ public class UserServiceTest {
 
 
     @Test
-    public void testDelete() {
+      void testDelete() {
         try {
             userService.delete(1);
         } catch (Exception ex) {

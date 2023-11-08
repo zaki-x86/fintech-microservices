@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class ServiceServiceTest {
+class ServiceServiceTest {
     @Mock
     private ServiceRepository serviceRepository;
     @Mock
@@ -58,7 +58,7 @@ public class ServiceServiceTest {
 
 
     @Test
-    public void testGetById() {
+    void testGetById() {
         int id = 1;
         when(serviceRepository.findById2(id)).thenReturn(Optional.of(DUMMY_SERVICE_RESPONSE));
         ServiceResponse serviceResponse = serviceService.get(id);
@@ -72,7 +72,7 @@ public class ServiceServiceTest {
     }
 
     @Test
-    public void testThrowsExceptionIfIdNotFoundInGetById() {
+    void testThrowsExceptionIfIdNotFoundInGetById() {
         int id = 4;
         when(serviceRepository.findById2(id)).thenThrow(CustomNotFoundException.class);
         assertThatThrownBy(() -> serviceService.get(id))
@@ -80,10 +80,10 @@ public class ServiceServiceTest {
     }
 
     @Test
-    public void testGetAll() {
+    void testGetAll() {
         List<ServiceResponse> dummyServiceResponses = List.of(DUMMY_SERVICE_RESPONSE, DUMMY_SERVICE_RESPONSE, DUMMY_SERVICE_RESPONSE);
         when(serviceRepository.findAll2(Sort.by("rowNumber"))).thenReturn(dummyServiceResponses);
-        List<ServiceResponse> serviceResponses =serviceService.getAll();
+        List<ServiceResponse> serviceResponses = serviceService.getAll();
         assertEquals(serviceResponses.size(), dummyServiceResponses.size());
     }
 }

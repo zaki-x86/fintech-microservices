@@ -39,6 +39,14 @@ dependencies {
 }
 
 
+sonarqube {
+    properties {
+        property "sonar.projectKey", "auth-service"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", "sqp_5d632466eb14d8e419eaa69dba442e594d9a526a"
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }

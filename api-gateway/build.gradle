@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'com.example'
@@ -33,10 +34,15 @@ dependencyManagement {
     }
 }
 
-//bootBuildImage {
-//    imageName = "microservices/${project.name}:${project.version}"
-//    pullPolicy = "IF_NOT_PRESENT"
-//}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "api-gateway"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", "sqp_0627d35619d2179a15c17bfdf7d8b98336cf8071"
+    }
+}
+
 
 tasks.named('test') {
     useJUnitPlatform()

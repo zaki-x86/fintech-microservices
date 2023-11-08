@@ -65,7 +65,7 @@ class MerchantServiceTest {
     }
 
     @Test
-    public void testThrowsExceptionIfIdNotFoundInGetById() {
+     void testThrowsExceptionIfIdNotFoundInGetById() {
         int id = 4;
         when(merchantRepository.findById(id)).thenThrow(CustomNotFoundException.class);
         assertThatThrownBy(() -> merchantService.get(id))

@@ -1,13 +1,9 @@
 package com.example.repository;
 
-import com.example.model.dto.UserRequest;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import java.util.Objects;
-
-import static com.example.Tables.USER;
 import static com.example.Tables.USER_CLIENT;
 
 @Repository

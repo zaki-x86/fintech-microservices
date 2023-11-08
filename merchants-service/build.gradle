@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.12.RELEASE'
     id 'java'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'com.example'
@@ -35,6 +36,15 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 
+}
+
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "merchants-service"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", "sqp_7a07227b496c5b46afbc17a5bb4984bc232c7fe4"
+    }
 }
 
 dependencyManagement {
