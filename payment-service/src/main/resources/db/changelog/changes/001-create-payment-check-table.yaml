@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220911-01
+      author: samir
+      changes:
+        - createTable:
+            tableName: payment_check
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: payment_check_pk
+                    nullable: false
+              - column:
+                  name: transaction_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+                    unique: true
+              - column:
+                  name: values
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_email
+                  type: VARCHAR(255)
+              - column:
+                  name: merchant_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: billing_check_request
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: billing_check_response
+                  type: text
+              - column:
+                  name: billing_check_status
+                  type: VARCHAR(10)
+                  defaultValue: 'WAITING'
+              - column:
+                  name: created_at
+                  type: datetime
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: datetime

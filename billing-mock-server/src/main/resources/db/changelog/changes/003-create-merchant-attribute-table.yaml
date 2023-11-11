@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220804-03
+      author: samir
+      changes:
+        - createTable:
+            tableName: merchant_attribute
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: merchant_attribute_pk
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: merchant_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(250)
+                  defaultValue: 'ENABLED'
+              - column:
+                  name: created_at
+                  type: datetime
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: datetime
+        - addForeignKeyConstraint:
+            baseTableName: merchant_attribute
+            baseColumnNames: merchant_id
+            constraintName: merchant_attribute_merchant_fk
+            referencedTableName: merchant
+            referencedColumnNames: id

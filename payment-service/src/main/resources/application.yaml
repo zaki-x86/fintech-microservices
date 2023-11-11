@@ -1,0 +1,14 @@
+server.port: 8081
+
+spring:
+  application:
+    name: payment-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/payment_db?stringtype=unspecified
+    username: postgres
+    password: 123
+  liquibase:
+    enabled: true
