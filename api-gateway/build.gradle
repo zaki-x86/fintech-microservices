@@ -1,21 +1,3 @@
-plugins {
-    id 'org.springframework.boot' version '2.6.3'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
-    id "org.sonarqube" version "3.4.0.2513"
-}
-
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-repositories {
-    mavenCentral()
-}
-
-ext {
-    set('springCloudVersion', "2021.0.0")
-}
 
 dependencies {
     implementation project(":grpc-common")
@@ -25,25 +7,4 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'net.devh:grpc-client-spring-boot-starter:2.13.1.RELEASE'
-
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
-
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "api-gateway"
-        property "sonar.host.url", "http://localhost:9000"
-        property "sonar.login", "sqp_0627d35619d2179a15c17bfdf7d8b98336cf8071"
-    }
-}
-
-
-tasks.named('test') {
-    useJUnitPlatform()
 }

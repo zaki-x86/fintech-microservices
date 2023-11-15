@@ -1,21 +1,3 @@
-plugins {
-    id 'org.springframework.boot' version '2.5.6'
-    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
-    id 'java'
-    id "org.sonarqube" version "3.4.0.2513"
-}
-
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-repositories {
-    mavenCentral()
-}
-
-ext {
-    set('springCloudVersion', "2020.0.3")
-}
 
 
 dependencies {
@@ -33,23 +15,6 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
-
-}
-
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "merchants-service"
-        property "sonar.host.url", "http://localhost:9000"
-        property "sonar.login", "sqp_7a07227b496c5b46afbc17a5bb4984bc232c7fe4"
-    }
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
 }
 
 tasks.named('test') {

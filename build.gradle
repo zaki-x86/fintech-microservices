@@ -4,13 +4,35 @@ plugins {
     id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
 repositories {
     mavenCentral()
 }
+
+subprojects {
+    if (it.project != 'grpc-common') {
+
+        group = 'com.fintech'
+        version = '0.0.1-SNAPSHOT'
+
+        apply plugin: 'java'
+        apply plugin: 'io.spring.dependency-management'
+        apply plugin: 'org.springframework.boot'
+
+        repositories {
+            mavenCentral()
+        }
+
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.3"
+            }
+        }
+
+        task prepareKotlinBuildScriptModel {}
+        task wrapper {}
+    }
+}
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'

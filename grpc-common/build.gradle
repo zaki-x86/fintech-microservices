@@ -5,15 +5,10 @@ buildscript {
         grpcVersion = '1.42.1'
     }
 }
-
 plugins {
     id 'java-library'
     id 'com.google.protobuf' version "${protobufPluginVersion}"
 }
-
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 
 repositories {
