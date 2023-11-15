@@ -1,6 +1,5 @@
 rootProject.name = 'fintech-microservices'
 include 'grpc-common'
-
 include 'api-gateway'
 include 'naming-server'
 include 'config-server'

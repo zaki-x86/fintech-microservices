@@ -4,14 +4,12 @@ plugins {
     id 'java'
 }
 
-repositories {
-    mavenCentral()
-}
+def commonDependencyModules = ["merchants-service", "payment-service", "users-service"]
 
 subprojects {
-    if (it.project != 'grpc-common') {
-
-        group = 'com.fintech'
+    def currentModule = it.name
+    if (currentModule != 'grpc-common') {
+        group = 'az.fintech.microservices'
         version = '0.0.1-SNAPSHOT'
 
         apply plugin: 'java'
@@ -28,17 +26,37 @@ subprojects {
             }
         }
 
-        task prepareKotlinBuildScriptModel {}
-        task wrapper {}
+        if (commonDependencyModules.contains(currentModule)) {
+            dependencies {
+                implementation 'org.liquibase:liquibase-core'
+                implementation 'io.springfox:springfox-boot-starter:3.0.0'
+                implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+                runtimeOnly 'org.postgresql:postgresql'
+                testImplementation 'org.springframework.boot:spring-boot-starter-test'
+            }
+        }
+
+
+        def hasModuleLombok = commonDependencyModules.contains(currentModule)
+                || currentModule == 'api-gateway' || currentModule == 'auth-service'
+        if(hasModuleLombok){
+            dependencies {
+                compileOnly 'org.projectlombok:lombok'
+                annotationProcessor 'org.projectlombok:lombok'
+            }
+        }
+
+
+        def hasModuleSpringWebAndConfig = commonDependencyModules.contains(currentModule)
+                || currentModule == 'auth-service'
+        if(hasModuleSpringWebAndConfig){
+            dependencies {
+                implementation 'org.springframework.cloud:spring-cloud-starter-config'
+                implementation 'org.springframework.boot:spring-boot-starter-web'
+            }
+        }
+
+        tasks.register('prepareKotlinBuildScriptModel') {}
+        tasks.register('wrapper') {}
     }
-}
-
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
 }

@@ -1,22 +1,8 @@
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.liquibase:liquibase-core'
-    implementation 'io.springfox:springfox-boot-starter:3.0.0'
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'io.springfox:springfox-boot-starter:3.0.0'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
     implementation 'com.vladmihalcea:hibernate-types-52:2.1.1'
 }
-
-
 
 tasks.named('test') {
     useJUnitPlatform()
