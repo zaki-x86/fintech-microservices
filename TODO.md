@@ -1,4 +1,14 @@
 TODO tasks:
+
+CENTRALIZED SWAGGER: 
+-
+HIGH:
+- optimize code
+- all swaggers get from DiscoveryServer for prod environment
+- jwt token configuration
+- api gateway configuration
+
+
 - security
      security properties (auth service, user service) from one place
      write login date to db
