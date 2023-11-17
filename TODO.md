@@ -1,3 +1,4 @@
+TODO tasks:
 - security
      security properties (auth service, user service) from one place
      write login date to db
@@ -13,4 +14,3 @@
 - mock-billing
 - security
 - find a way to create database automatically
-
