@@ -39,7 +39,7 @@ subprojects {
 
         def hasModuleLombok = commonDependencyModules.contains(currentModule)
                 || currentModule == 'api-gateway' || currentModule == 'auth-service'
-        if(hasModuleLombok){
+        if (hasModuleLombok) {
             dependencies {
                 compileOnly 'org.projectlombok:lombok'
                 annotationProcessor 'org.projectlombok:lombok'
@@ -47,14 +47,20 @@ subprojects {
         }
 
 
-        def hasModuleSpringWebAndConfig = commonDependencyModules.contains(currentModule)
+        def hasModuleSpringWeb = commonDependencyModules.contains(currentModule)
                 || currentModule == 'auth-service'
-        if(hasModuleSpringWebAndConfig){
+        if (hasModuleSpringWeb) {
             dependencies {
-                implementation 'org.springframework.cloud:spring-cloud-starter-config'
                 implementation 'org.springframework.boot:spring-boot-starter-web'
             }
         }
+
+        if (currentModule != 'config-server') {
+            dependencies {
+                implementation 'org.springframework.cloud:spring-cloud-starter-config'
+            }
+        }
+
 
         tasks.register('prepareKotlinBuildScriptModel') {}
         tasks.register('wrapper') {}
