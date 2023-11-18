@@ -20,4 +20,7 @@ public class LoggingFilter implements GlobalFilter {
         logger.info("Path of the request received {} -> {}", request.getMethod(), request.getPath());
         return chain.filter(exchange);
     }
+
+
+
 }
