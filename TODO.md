@@ -1,11 +1,20 @@
 TODO tasks:
 
+GENERAL:
+-
+LOW:
+- optimize multi-module gradle builds when change in any one
+
+GATEWAY:
+-
+LOW:
+- do cors configuration programmatically, because it is better to get CentralizedSwagger Origin from Discovery
+
 CENTRALIZED SWAGGER: 
 -
 HIGH:
-- jwt token configuration
 LOW:
-- disable access from public
+- jwt token configuration
 
 
 - security
