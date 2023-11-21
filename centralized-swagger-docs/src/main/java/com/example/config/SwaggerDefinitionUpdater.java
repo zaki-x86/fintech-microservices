@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Component
 public class SwaggerDefinitionUpdater {
+    public static final String X_USER_EMAIL = "X-User-Email";
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private static final String DEFAULT_SWAGGER_URL = "/v2/api-docs";
     private static final String KEY_SWAGGER_URL = "swagger_url";
@@ -50,7 +51,9 @@ public class SwaggerDefinitionUpdater {
 
                         Optional<String> jsonData = getSwaggerDefinitionForAPI(serviceId, swaggerURL);
                         if (jsonData.isPresent()) {
-                            String serviceDescription = jsonData.get().replaceAll(SWAGGER_HOST_PATTERN, gatewayAddress);
+                            String serviceDescription = jsonData.get()
+                                    .replaceAll(X_USER_EMAIL, Config.TOKEN_PREFIX)
+                                    .replaceAll(SWAGGER_HOST_PATTERN, gatewayAddress);
                             definitionContext.addServiceDefinition(serviceId, serviceDescription);
                         } else {
                             logger.error("Skipping service id : {} Error : Could not get Swagger definition from API ", serviceId);

@@ -14,7 +14,12 @@ CENTRALIZED SWAGGER:
 -
 HIGH:
 LOW:
-- jwt token configuration
+
+USERS-SERVICE:
+MIDDLE:
+- change apis in a way to get Identification from header
+LOW:
+- liquibase & jOOQ working together
 
 
 - security
