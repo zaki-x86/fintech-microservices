@@ -30,7 +30,6 @@ LOW:
      grpc
      test if needed
 - login api test
-- config-server integration
 - kibana
 - add retry to all microservices while send request
 - mock-processing
