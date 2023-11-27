@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: Test App
+  sleuth:
+    sampler:
+      probability: 0.5
+#  zipkin:
+#    enabled: true
+#    service:
+#      name: test
+#    discovery-client-enabled: false
+#    sender:
+#      type: web
+logging:
+  level:
+    org:
+      springframework:
+        web: trace

@@ -13,6 +13,9 @@ LOW:
 CENTRALIZED SWAGGER: 
 -
 HIGH:
+MIDDLE:
+- implement zipkin
+- research configs of zipkin and storage types
 LOW:
 
 USERS-SERVICE:
