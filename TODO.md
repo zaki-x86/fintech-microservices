@@ -13,8 +13,6 @@ CENTRALIZED SWAGGER:
 -
 HIGH:
 MIDDLE:
-- research configs of zipkin and storage types
-- zipkin grpc execution time
 LOW:
 
 GRPC-COMMON:
