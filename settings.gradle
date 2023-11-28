@@ -7,3 +7,5 @@ include 'merchants-service'
 include 'auth-service'
 include 'payment-service'
 include 'users-service'
+include 'centralized-swagger-docs'
+

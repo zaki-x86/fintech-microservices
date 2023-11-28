@@ -3,7 +3,6 @@ TODO tasks:
 GENERAL:
 -
 LOW:
-- optimize multi-module gradle builds when change in any one
 
 GATEWAY:
 -
@@ -14,9 +13,13 @@ CENTRALIZED SWAGGER:
 -
 HIGH:
 MIDDLE:
-- implement zipkin
 - research configs of zipkin and storage types
+- zipkin grpc execution time
 LOW:
+
+GRPC-COMMON:
+- LOW:
+add dependency versions to gradle.properties
 
 USERS-SERVICE:
 MIDDLE:

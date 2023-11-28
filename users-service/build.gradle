@@ -1,31 +1,38 @@
 buildscript {
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.6")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
     }
 }
 
-
 plugins {
-    id 'nu.studer.jooq' version '6.0.1'
-    id 'pl.allegro.tech.build.axion-release' version '1.13.2'
+    id 'nu.studer.jooq' version "$studerJooqVersion"
+    id 'pl.allegro.tech.build.axion-release' version "$axionReleaseVersion"
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+    }
+}
 
 dependencies {
-    implementation "io.jsonwebtoken:jjwt-api:0.11.2"
-    implementation "io.jsonwebtoken:jjwt-impl:0.11.2"
-    implementation "io.jsonwebtoken:jjwt-jackson:0.11.2"
-    implementation 'eu.bitwalker:UserAgentUtils:1.21'
-//    implementation 'org.liquibase:liquibase-core'
-//    implementation 'io.springfox:springfox-boot-starter:3.0.0'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.6'
-//    annotationProcessor 'org.projectlombok:lombok'
-//    compileOnly 'org.projectlombok:lombok'
+    implementation "io.jsonwebtoken:jjwt-api:$jwtVersion"
+    implementation "io.jsonwebtoken:jjwt-impl:$jwtVersion"
+    implementation "io.jsonwebtoken:jjwt-jackson:$jwtVersion"
+    implementation "eu.bitwalker:UserAgentUtils:$userAgentUtilsVersion"
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
-//    runtimeOnly 'org.postgresql:postgresql'
-    jooqGenerator 'org.postgresql:postgresql:42.3.1'
-//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    jooqGenerator "org.postgresql:postgresql:$jooqGeneratorPostgreVersion"
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    implementation "io.springfox:springfox-boot-starter:$swaggerSpringFoxVersion"
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
 }
 
 

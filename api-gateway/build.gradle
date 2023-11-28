@@ -1,6 +1,18 @@
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+    }
+}
+
 dependencies {
     implementation project(":grpc-common")
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'net.devh:grpc-client-spring-boot-starter:2.13.1.RELEASE'
+    implementation "net.devh:grpc-client-spring-boot-starter:$grpcClienSpringBootVersion"
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
