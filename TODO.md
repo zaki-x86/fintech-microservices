@@ -4,8 +4,11 @@ GENERAL:
 -
 MIDDLE:
 - metrics monitoring research and impl (Prometheus, Graphana)
-- add prometheus to docker.compose
+- configure prometheus for multi-module project
 - enable actuator metrics to only prometheus 
+- test prometheus alerts to send alert to some email
+- do prometheus research like pros and cons
+- discover services automatically in prometheus.yml
 
 GATEWAY:
 -
@@ -20,7 +23,7 @@ LOW:
 
 GRPC-COMMON:
 - LOW:
-add dependency versions to gradle.properties
+try to add dependency versions to gradle.properties
 
 USERS-SERVICE:
 MIDDLE:
