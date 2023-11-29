@@ -13,7 +13,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation ("io.zipkin.brave:brave-instrumentation-grpc")
+    implementation "io.zipkin.brave:brave-instrumentation-grpc"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 }

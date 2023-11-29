@@ -2,7 +2,10 @@ TODO tasks:
 
 GENERAL:
 -
-LOW:
+MIDDLE:
+- metrics monitoring research and impl (Prometheus, Graphana)
+- add prometheus to docker.compose
+- enable actuator metrics to only prometheus 
 
 GATEWAY:
 -

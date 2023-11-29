@@ -23,6 +23,12 @@ spring:
   liquibase:
     enabled: true
 
-  sleuth:
-    sampler:
-      probability: 1.0 # 1.0 trace every request with percentage
+management:
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'

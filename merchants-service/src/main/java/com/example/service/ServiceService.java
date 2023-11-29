@@ -8,8 +8,10 @@ import com.example.model.dto.ServiceResponse;
 import com.example.repository.MerchantRepository;
 import com.example.repository.ServiceRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.domain.Sort;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @org.springframework.stereotype.Service
@@ -19,7 +21,7 @@ public class ServiceService {
     private final ServiceRepository serviceRepository;
     private final MerchantRepository merchantRepository;
 
-    public List<ServiceResponse> getAll() {
+    public List<ServiceResponse> getAll()  {
         Sort sort = Sort.by("rowNumber");
         return serviceRepository.findAll2(sort);
     }
