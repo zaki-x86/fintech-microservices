@@ -6,10 +6,8 @@ rule_files:
   - alert.yml
 
 scrape_configs:
-  - job_name: 'Spring Boot Application input'
+  - job_name: 'actuator_fetcher'
     metrics_path: '/actuator/prometheus'
     scrape_interval: 3s
     static_configs:
-      - targets: ['192.168.100.3:8082']
-        labels:
-          application: 'My Spring Boot Application'
+      - targets: ['10.49.153.133:8082']

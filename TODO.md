@@ -3,11 +3,12 @@ TODO tasks:
 GENERAL:
 -
 MIDDLE:
-- metrics monitoring research and impl (Prometheus, Graphana)
+- metrics monitoring research  (Prometheus, Graphana)
 - configure prometheus for multi-module project
 - enable actuator metrics to only prometheus 
 - test prometheus alerts to send alert to some email
-- do prometheus research like pros and cons
+- do prometheus and graphana research like pros and cons
+- graphana JVM dashboard and integration with prometheus in yaml like predefined config possible?
 - discover services automatically in prometheus.yml
 
 GATEWAY:
