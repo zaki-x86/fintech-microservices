@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-def commonDependencyModules = ["merchants-service", "payment-service", "users-service"]
+def commonDependencyModules = ["merchants-service", "users-service"]
 
 subprojects {
     def currentModule = it.name

@@ -10,6 +10,11 @@ MIDDLE:
 - do prometheus and graphana research like pros and cons
 - graphana JVM dashboard and integration with prometheus in yaml like predefined config possible?
 - discover services automatically in prometheus.yml
+- SonarQube check to all projects
+
+BANK-MOCK:
+MEDIUM:
+add validation
 
 GATEWAY:
 -
@@ -47,3 +52,22 @@ LOW:
 - mock-billing
 - security
 - find a way to create database automatically
+
+
+payment service
+bank mock service
+kafka + notification service
+
+TECH STACK:
+AWS deploy + Jenkins - Jmeter        
+prometheus + grafana                 
+mongodb, elk                            
+kafka                                   
+Zipkin                                         
+k8s,ingress                                
+sonarqube                                
+Cache (Redis)                                   
+Resilence4j2 + Fault tolerance                 
+Go                                          
+ChatGPT                               
+Machine learning model                 

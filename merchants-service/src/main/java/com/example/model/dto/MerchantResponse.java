@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MerchantResponse {
+    @NotEm
     private int id;
     private String name;
     private String icon;
