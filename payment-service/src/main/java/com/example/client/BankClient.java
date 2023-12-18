@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "bank", url = "http://localhost:8585")
+@FeignClient(name = "bank", url = "http://localhost:8080")
 public interface BankClient {
 
     @PostMapping("/pay")

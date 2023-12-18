@@ -28,7 +28,7 @@ public class Payment {
     private String bankRequest;
     private String bankResponse;
     @Enumerated(EnumType.STRING)
-    private BankStatus bankStatusStatus;
+    private BankStatus bankStatus;
     @Column(scale = 2)
     private BigDecimal amount;
     @CreationTimestamp
