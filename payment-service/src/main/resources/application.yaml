@@ -18,3 +18,8 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
   liquibase:
     enabled: true
+
+logging:
+  level:
+    com:
+      example: DEBUG

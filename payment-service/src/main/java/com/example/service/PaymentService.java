@@ -21,29 +21,27 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PaymentService {
     private final BankClientProxy bankProxy;
-    private final BankClient client;
     private final JsonConvertor convertor;
-
+    private final PaymentRepo repo;
 
     public PaymentResponse pay(PaymentRequest request, String userEmail) {
 
         Payment payment = preInitialize(request, userEmail);
 
-        BankRequest bankRequest = BankRequest.builder().amount(request.getAmount())
+        BankRequest bankRequest = BankRequest.builder()
+                .amount(request.getAmount())
                 .cardInfo(request.getCardInfo())
                 .build();
-
         payment.setBankRequest(convertor.toJson(bankRequest));
 
-
         BankResponse bankResponse = bankProxy.pay(bankRequest);
+
         payment.setBankResponse(convertor.toJson(bankResponse));
         payment.setTransactionId(bankResponse.getTransactionId());
         payment.setBankStatus(bankResponse.getBankStatus());
-
-
-        // TODO: save
         // TODO: mail/notification request
+
+        repo.save(payment);
 
         return fillResponse(payment);
     }
