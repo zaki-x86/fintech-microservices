@@ -26,7 +26,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: userEmail
+                  name: user_email
                   type: VARCHAR(255)
               - column:
                   name: merchant
